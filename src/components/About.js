@@ -13,7 +13,15 @@ export default function About() {
           experience. Developed using React and powered by the News API, this
           app is designed to deliver a curated selection of news articles from
           various categories, ensuring you stay informed about the latest
-          happenings around the world.
+          happenings around the world. This project was made with{" "}
+          <a
+            href="https://www.youtube.com/@CodeWithHarry"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Code With Harry
+          </a>
+          's awesome React tutorial.
         </p>
       </div>
       <div className="mb-5">
@@ -57,11 +65,11 @@ export default function About() {
           Aur kya haal chal
           <br /> Toh mera naam hai mohit kumar or abhi me react seekh raha iske
           alava mujhe python and django bhi aata hai. React seekhne ke peeche
-          mera karan hai ki kuch naya banana (Facebook ya Youtube? Han ye jyada ho gya😅). Mujhe nahi pta ki me isse kya
-          banane wala hoon lekin abhi mera plan hai ki ek aisi site banane ka jo
-          azat roop se hame kisi dusre ke sath connect ker sake (omegle jaisi
-          lekin behtar). Shayad bhavishya me kuch or behtar bhi bana saku toh
-          dekhte hai. <br />
+          mera karan hai ki kuch naya banana (Facebook ya Youtube? Han ye jyada
+          ho gya😅). Mujhe nahi pta ki me isse kya banane wala hoon lekin abhi
+          mera plan hai ki ek aisi site banane ka jo azat roop se hame kisi
+          dusre ke sath connect ker sake (omegle jaisi lekin behtar). Shayad
+          bhavishya me kuch or behtar bhi bana saku toh dekhte hai. <br />
           Aap mujse se&nbsp;
           <a
             href="https://www.linkedin.com/in/mohit-kumar-67924b267/"
