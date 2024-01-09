@@ -13,7 +13,7 @@ export default function SearchItem(props) {
   const [articles, setarticles] = useState([]);
   const [loading, setloading] = useState(true);
   const fetchData = async (num) => {
-    let url = `https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
+    let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
     let response = await fetch(url);
     let data = await response.json();
     if (data.status !== "error") {
@@ -83,7 +83,7 @@ export async function SearchItemLoader({ request, apiKey }) {
   const query = url.searchParams.get("query");
   let articles = null;
   let maxPage = 1;
-  let apiUrl = `https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${apiKey}&page=1&pageSize=10`;
+  let apiUrl = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${apiKey}&page=1&pageSize=10`;
   let response = await fetch(apiUrl);
   let data = await response.json();
   if (data.status !== "error") {
