@@ -1,5 +1,5 @@
 import React from "react";
-import dailydoseicon from "./dailydose.png";
+import dailydoseicon from "../media/dailydose.png";
 
 export default function About() {
   document.title = "DailyDose - About";

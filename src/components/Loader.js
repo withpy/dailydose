@@ -1,5 +1,5 @@
 import React from "react";
-import loader from "./Rhombus.gif";
+import loader from "../media/Rhombus.gif";
 // import loader from "./pacman_loader.gif";
 
 export default function Loader() {
