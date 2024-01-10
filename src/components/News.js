@@ -5,6 +5,12 @@ import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function News(props) {
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  document.title = `DailyDose${
+    props.path ? "" : " - " + capitalizeFirstLetter(props.category)
+  }`;
   const [articles, setarticles] = useState([]);
   const [page, setpage] = useState(1);
   const [loading, setloading] = useState(true);
@@ -78,4 +84,5 @@ News.defaultProps = {
   pageSize: 10,
   category: "general",
   country: "in",
+  path: null,
 };

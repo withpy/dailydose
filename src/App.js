@@ -28,7 +28,7 @@ function App() {
         {
           path: "/",
           element: (
-            <News setloadingProgress={setloadingProgress} apiKey={apiKey} />
+            <News path="Home" setloadingProgress={setloadingProgress} apiKey={apiKey} />
           ),
         },
         {

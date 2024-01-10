@@ -6,9 +6,13 @@ import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function SearchItem(props) {
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   const maxPage = useLoaderData().maxPage;
   const article = useLoaderData().articles;
   const query = useLoaderData().query;
+  document.title = `DailyDose - ${capitalizeFirstLetter(query)}`;
   const [page, setPage] = useState(1);
   const [articles, setarticles] = useState([]);
   const [loading, setloading] = useState(true);
