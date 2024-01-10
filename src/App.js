@@ -5,7 +5,6 @@ import SearchItem, { SearchItemLoader } from "./components/SearchItem";
 import { createHashRouter, RouterProvider, Outlet } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import About from "./components/About";
-import Seo from "./components/Seo";
 
 function App() {
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -15,7 +14,6 @@ function App() {
     {
       element: (
         <>
-          <Seo />
           <LoadingBar
             color="#f11946"
             progress={loadingProgress}
