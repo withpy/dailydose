@@ -42,6 +42,7 @@ export default function News(props) {
     props.setloadingProgress(20);
     fetchData(page);
     props.setloadingProgress(50);
+     // eslint-disable-next-line
   }, []);
   return loading ? (
     <Loader />

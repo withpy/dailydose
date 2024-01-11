@@ -1,11 +1,9 @@
 import React from "react";
-import { Link, Form } from "react-router-dom";
+import { Link, Form, useLocation } from "react-router-dom";
 
 function Navbar() {
-  const changeactive=(id)=>{
-    document.querySelector('.nav-link.active').className='nav-link'
-    document.querySelector(`#${id}`).className+=" active"
-  }
+  let location = useLocation();
+  let loaction_path=location.pathname
   return (
     <div>
       <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
@@ -27,12 +25,12 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" id="home" aria-current="page" to="/" onClick={()=>{changeactive("home")}}>
+                <Link className={`nav-link ${loaction_path!=="/about"?"active":""}`} aria-current="page" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" id="about" to="/about" onClick={()=>{changeactive("about")}}>
+                <Link className={`nav-link ${loaction_path==="/about"?"active":""}`} to="/about">
                   About
                 </Link>
               </li>
@@ -48,37 +46,37 @@ function Navbar() {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/business">
+                    <Link className="dropdown-item" to="/business">
                       Business
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/entertainment">
+                    <Link className="dropdown-item" to="/entertainment">
                       Entertainment
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/general">
+                    <Link className="dropdown-item" to="/general">
                       General
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/health">
+                    <Link className="dropdown-item" to="/health">
                       Health
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/science">
+                    <Link className="dropdown-item" to="/science">
                       Science
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/sports">
+                    <Link className="dropdown-item" to="/sports">
                       Sports
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" onClick={()=>{changeactive("home")}} to="/technology">
+                    <Link className="dropdown-item" to="/technology">
                       Technology
                     </Link>
                   </li>
@@ -99,7 +97,7 @@ function Navbar() {
                 name="query"
                 required
               />
-              <button className="btn btn-outline-success" type="submit" onClick={()=>{changeactive("home")}}>
+              <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </Form>
