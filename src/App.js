@@ -1,67 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
-import SearchItem, { SearchItemLoader } from "./components/SearchItem";
+import SearchItem from "./components/SearchItem";
 import { createHashRouter, RouterProvider, Outlet } from "react-router-dom";
-import LoadingBar from "react-top-loading-bar";
 import About from "./components/About";
+import ValueState from "./context/ValueState";
 
 function App() {
   const apiKey = process.env.REACT_APP_API_KEY;
-  const [loadingProgress, setloadingProgress] = useState(0);
-
   const router = createHashRouter([
     {
       element: (
         <>
-          <LoadingBar
-            color="#f11946"
-            progress={loadingProgress}
-            onLoaderFinished={() => setloadingProgress(0)}
-          />
-          <Navbar />
-          <Outlet />
+          <ValueState>
+            <Navbar />
+            <Outlet />
+          </ValueState>
         </>
       ),
 
       children: [
         {
           path: "/",
-          element: (
-            <News
-              path="Home"
-              setloadingProgress={setloadingProgress}
-              apiKey={apiKey}
-            />
-          ),
+          element: <News path="Home" apiKey={apiKey} />,
         },
         {
           path: "/general",
-          element: (
-            <News
-              setloadingProgress={setloadingProgress}
-              key="general"
-              category="general"
-              apiKey={apiKey}
-            />
-          ),
+          element: <News key="general" category="general" apiKey={apiKey} />,
         },
         {
           path: "/business",
-          element: (
-            <News
-              setloadingProgress={setloadingProgress}
-              key="business"
-              category="business"
-              apiKey={apiKey}
-            />
-          ),
+          element: <News key="business" category="business" apiKey={apiKey} />,
         },
         {
           path: "/entertainment",
           element: (
             <News
-              setloadingProgress={setloadingProgress}
               key="entertainment"
               category="entertainment"
               apiKey={apiKey}
@@ -70,52 +44,26 @@ function App() {
         },
         {
           path: "/health",
-          element: (
-            <News
-              setloadingProgress={setloadingProgress}
-              key="health"
-              category="health"
-              apiKey={apiKey}
-            />
-          ),
+          element: <News key="health" category="health" apiKey={apiKey} />,
         },
         {
           path: "/science",
-          element: (
-            <News
-              setloadingProgress={setloadingProgress}
-              key="science"
-              category="science"
-              apiKey={apiKey}
-            />
-          ),
+          element: <News key="science" category="science" apiKey={apiKey} />,
         },
         {
           path: "/sports",
-          element: (
-            <News
-              setloadingProgress={setloadingProgress}
-              key="sports"
-              category="sports"
-              apiKey={apiKey}
-            />
-          ),
+          element: <News key="sports" category="sports" apiKey={apiKey} />,
         },
         {
           path: "/technology",
           element: (
-            <News
-              setloadingProgress={setloadingProgress}
-              key="technology"
-              category="technology"
-              apiKey={apiKey}
-            />
+            <News key="technology" category="technology" apiKey={apiKey} />
           ),
         },
         {
           path: "/search",
           element: <SearchItem pageSize={10} apiKey={apiKey} />,
-          loader: SearchItemLoader,
+          // loader: SearchItemLoader,
         },
         {
           path: "/about",

@@ -1,49 +1,74 @@
-import { useLoaderData } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import NewsItem from "./NewsItem";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ErrorPage from "./ErrorPage";
 import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ErrorContext from "../context/errorContext";
+import LoadingProgressContext from "../context/loadingProgressContext";
 
 export default function SearchItem(props) {
+  const location = useLocation();
+  const queryparam = new URLSearchParams(location.search);
+  const query = queryparam.get("query");
+  const { setloadingProgress } = useContext(LoadingProgressContext);
+  const { setError } = useContext(ErrorContext);
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  const maxPage = useLoaderData().maxPage;
-  const article = useLoaderData().articles;
-  const query = useLoaderData().query;
+
   document.title = `DailyDose - ${capitalizeFirstLetter(query)}`;
   const [page, setPage] = useState(1);
+  const [maxPage, setmaxPage] = useState(1);
   const [articles, setarticles] = useState([]);
   const [loading, setloading] = useState(true);
   const fetchData = async (num) => {
-    let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    if (data.status !== "error") {
-      let filtered_articles = data.articles.filter(
-        (article) => article.urlToImage !== null
-      );
-      setPage(num);
-      setarticles(articles.concat(filtered_articles));
+    try {
+      let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
+      let response = await fetch(url);
+      let data = await response.json();
+      if (data.status !== "error") {
+        if (data.articles.length) {
+          let filtered_articles = data.articles.filter(
+            (article) => article.urlToImage !== null
+          );
+          let totalResults = data.totalResults;
+          let maxPage = Math.ceil(totalResults / props.pageSize);
+          setPage(num);
+          setarticles(articles.concat(filtered_articles));
+          setmaxPage(maxPage);
+        } else {
+          setarticles([]);
+          setError(`No articles were found for the query: ${query}`);
+        }
+      } else {
+        setError(
+          "Sorry, but I'm currently utilizing the NewsAPI's developer API that only allows 100 requests per day, and the limit has been exceeded for today."
+        );
+      }
+    } catch (error) {
+      setError("Some error occurred - " + error.message);
+    }
+    if (num <= 1) {
+      setmaxPage(1);
+      setloading(false);
+      setloadingProgress(100);
     }
   };
   useEffect(() => {
+    document.querySelector('form input').value=''
     setloading(true);
-    setarticles(article);
-    setloading(false);
-  }, [article]);
+    setloadingProgress(20);
+    fetchData(1);
+    setloadingProgress(50);
+    // eslint-disable-next-line
+  }, [query]);
   return loading ? (
     <Loader />
-  ) : articles ? (
+  ) : articles.length ? (
     <div className="container" style={{ marginTop: "4rem" }}>
-      {articles.length ? (
-        <h3 className="display-2">Top Stories</h3>
-      ) : (
-        <h5 className="text-center">
-          No articles were found for the query: '{query}'
-        </h5>
-      )}
+      <h3 className="display-2">Top Stories</h3>
+
       <InfiniteScroll
         dataLength={articles.length} //This is important field to render the next data
         next={() => {
@@ -75,25 +100,4 @@ export default function SearchItem(props) {
   ) : (
     <ErrorPage />
   );
-}
-
-export async function SearchItemLoader({ request, apiKey }) {
-  apiKey = process.env.REACT_APP_API_KEY;
-  const searchValue = document.querySelector("form .form-control");
-  if (searchValue) {
-    searchValue.value = "";
-  }
-  const url = new URL(request.url);
-  const query = url.searchParams.get("query");
-  let articles = null;
-  let maxPage = 1;
-  let apiUrl = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/everything?q=${query}&language=en&apiKey=${apiKey}&page=1&pageSize=10`;
-  let response = await fetch(apiUrl);
-  let data = await response.json();
-  if (data.status !== "error") {
-    articles = data.articles.filter((article) => article.urlToImage !== null);
-    let totalResults = data.totalResults;
-    maxPage = Math.ceil(totalResults / 10);
-  }
-  return { articles: articles, maxPage: maxPage, query: query };
 }

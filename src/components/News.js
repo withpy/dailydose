@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NewsItem from "./NewsItem";
 import ErrorPage from "./ErrorPage";
 import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ErrorContext from "../context/errorContext";
+import LoadingProgressContext from "../context/loadingProgressContext";
 
 export default function News(props) {
+  const { setloadingProgress } = useContext(LoadingProgressContext);
+  const seterror = useContext(ErrorContext);
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -16,22 +20,30 @@ export default function News(props) {
   const [loading, setloading] = useState(true);
   const [maxPage, setmaxPage] = useState(1);
   const fetchData = async (num) => {
-    let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    if (data.status !== "error") {
-      let filtered_articles = data.articles.filter(
-        (article) => article.urlToImage !== null
-      );
-      let totalResults = data.totalResults;
-      let maxPage = Math.ceil(totalResults / props.pageSize);
-      setarticles(articles.concat(filtered_articles));
-      setpage(num);
-      setmaxPage(maxPage);
+    try {
+      let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
+      let response = await fetch(url);
+      let data = await response.json();
+      if (data.status !== "error") {
+        let filtered_articles = data.articles.filter(
+          (article) => article.urlToImage !== null
+        );
+        let totalResults = data.totalResults;
+        let maxPage = Math.ceil(totalResults / props.pageSize);
+        setarticles(articles.concat(filtered_articles));
+        setpage(num);
+        setmaxPage(maxPage);
+      } else {
+        seterror.setError(
+          "Sorry, but I'm currently utilizing the NewsAPI's developer API that only allows 100 requests per day, and the limit has been exceeded for today."
+        );
+      }
+    } catch (error) {
+      seterror.setError("Some error occurred - " + error.message);
     }
     if (num <= 1) {
       setloading(false);
-      props.setloadingProgress(100);
+      setloadingProgress(100);
     }
   };
 
@@ -39,10 +51,10 @@ export default function News(props) {
     fetchData(page + 1);
   };
   useEffect(() => {
-    props.setloadingProgress(20);
-    fetchData(page);
-    props.setloadingProgress(50);
-     // eslint-disable-next-line
+    setloadingProgress(20);
+    fetchData(1);
+    setloadingProgress(50);
+    // eslint-disable-next-line
   }, []);
   return loading ? (
     <Loader />

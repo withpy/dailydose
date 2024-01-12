@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React, { useContext } from "react";
+import ErrorContext from "../context/errorContext";
 export default function ErrorPage() {
+  const errorMessage = useContext(ErrorContext);
   return (
-    <div className='container text-center' style={{ marginTop: "4rem" }}>
-    <h1>Oops!</h1>
-    <p>Sorry, but I'm currently utilizing the NewsAPI's developer API that only allows 100 requests per day, and the limit has been exceeded for today.</p>
-  </div>
-  )
+    <div className="container text-center" style={{ marginTop: "4rem" }}>
+      <h1>Oops!</h1>
+      <p>{errorMessage.error}</p>
+    </div>
+  );
 }

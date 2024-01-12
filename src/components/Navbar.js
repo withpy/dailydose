@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Form, useLocation } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
+import LoadingProgressContext from "../context/loadingProgressContext";
 
 function Navbar() {
   let location = useLocation();
-  let loaction_path=location.pathname
+  let loaction_path = location.pathname;
+  const { loadingProgress, setloadingProgress } = useContext(
+    LoadingProgressContext
+  );
+
   return (
     <div>
+      <LoadingBar
+        color="#f11946"
+        progress={loadingProgress}
+        onLoaderFinished={() => setloadingProgress(0)}
+      />
       <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
@@ -25,12 +36,23 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className={`nav-link ${loaction_path!=="/about"?"active":""}`} aria-current="page" to="/">
+                <Link
+                  className={`nav-link ${
+                    loaction_path !== "/about" ? "active" : ""
+                  }`}
+                  aria-current="page"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${loaction_path==="/about"?"active":""}`} to="/about">
+                <Link
+                  className={`nav-link ${
+                    loaction_path === "/about" ? "active" : ""
+                  }`}
+                  to="/about"
+                >
                   About
                 </Link>
               </li>

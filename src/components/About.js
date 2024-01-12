@@ -18,9 +18,16 @@ export default function About() {
         <p>
           DailyDose is a learning project created with passion and dedication to
           provide users with a seamless and informative news browsing
-          experience. Developed using React and powered by the News API, this
-          app is designed to deliver a curated selection of news articles from
-          various categories, ensuring you stay informed about the latest
+          experience. Developed using React and powered by the{" "}
+          <a
+            href="https://newsapi.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            News API
+          </a>
+          , this app is designed to deliver a curated selection of news articles
+          from various categories, ensuring you stay informed about the latest
           happenings around the world. This project was made with{" "}
           <a
             href="https://www.youtube.com/@CodeWithHarry"

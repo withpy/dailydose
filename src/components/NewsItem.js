@@ -17,7 +17,7 @@ export default function NewsItem(props) {
           <div className="col-md-4 text-center">
             <img
               src={imageUrl}
-              className="img-fluid rounded-start mt-1"
+              className="img-fluid rounded-sm-top rounded-md-start mt-md-0.25 mt-sm-0.5"
               alt="..."
               style={{
                 width: "95%",

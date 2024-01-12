@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+a {
+  color: black;
+}
+
+/* For medium and larger screens (md and up) */
+@media (min-width: 768px) {
+  .rounded-md-start {
+    border-radius: 0.2rem 0 0 0.2rem;
+  }
+  .mt-md-0\.25 {
+    margin-top: 0.25rem !important;
+  }
+}
+
+/* For small screens (sm) */
+@media (max-width: 767px) {
+  .rounded-sm-top {
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+  }
+  .mt-sm-0\.5 {
+    margin-top: 0.5rem !important;
+  }
+}
