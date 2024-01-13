@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/dailydose/static/css/main.e6c13ad2.css",
-    "main.js": "/dailydose/static/js/main.c6113156.js",
+    "main.css": "/dailydose/static/css/main.19e8c9f1.css",
+    "main.js": "/dailydose/static/js/main.351596dd.js",
     "static/js/787.6643f1c0.chunk.js": "/dailydose/static/js/787.6643f1c0.chunk.js",
     "static/media/dailydose.png": "/dailydose/static/media/dailydose.8b5bba3327a1a16ad645.png",
     "static/media/Rhombus.gif": "/dailydose/static/media/Rhombus.9c7cd866c7fa25391ccd.gif",
     "index.html": "/dailydose/index.html",
-    "main.e6c13ad2.css.map": "/dailydose/static/css/main.e6c13ad2.css.map",
-    "main.c6113156.js.map": "/dailydose/static/js/main.c6113156.js.map",
+    "main.19e8c9f1.css.map": "/dailydose/static/css/main.19e8c9f1.css.map",
+    "main.351596dd.js.map": "/dailydose/static/js/main.351596dd.js.map",
     "787.6643f1c0.chunk.js.map": "/dailydose/static/js/787.6643f1c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.c6113156.js"
+    "static/css/main.19e8c9f1.css",
+    "static/js/main.351596dd.js"
   ]
 }
