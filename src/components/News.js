@@ -23,7 +23,7 @@ export default function News(props) {
   const [maxPage, setmaxPage] = useState(1);
   const fetchData = async (num) => {
     try {
-      let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
+      let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
       let response = await fetch(url);
       let data = await response.json();
       if (data.status !== "error") {
