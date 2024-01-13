@@ -11,7 +11,7 @@ function Navbar() {
   );
 
   return (
-    <div>
+    <div style={{ marginBottom: "4rem" }}>
       <LoadingBar
         color="#f11946"
         progress={loadingProgress}

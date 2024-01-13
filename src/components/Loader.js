@@ -4,7 +4,7 @@ import loader from "../media/Rhombus.gif";
 
 export default function Loader() {
   return (
-    <div className="text-center" style={{ marginTop: "4rem" }}>
+    <div className="text-center">
       <img src={loader} alt="loader" />
     </div>
   );

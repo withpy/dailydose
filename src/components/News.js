@@ -5,10 +5,12 @@ import Loader from "./Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ErrorContext from "../context/errorContext";
 import LoadingProgressContext from "../context/loadingProgressContext";
+import AlertContext from "../context/alertContext";
 
 export default function News(props) {
   const { setloadingProgress } = useContext(LoadingProgressContext);
   const seterror = useContext(ErrorContext);
+  const { setalert } = useContext(AlertContext);
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -21,7 +23,7 @@ export default function News(props) {
   const [maxPage, setmaxPage] = useState(1);
   const fetchData = async (num) => {
     try {
-      let url = `https://dailydose.pythonanywhere.com/https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${num}&pageSize=${props.pageSize}`;
       let response = await fetch(url);
       let data = await response.json();
       if (data.status !== "error") {
@@ -30,10 +32,17 @@ export default function News(props) {
         );
         let totalResults = data.totalResults;
         let maxPage = Math.ceil(totalResults / props.pageSize);
-        setarticles(articles.concat(filtered_articles));
         setpage(num);
         setmaxPage(maxPage);
+        setarticles(articles.concat(filtered_articles));
       } else {
+        if (num >= 2) {
+          setmaxPage(page);
+          setalert(
+            "info",
+            "Sorry, but I'm currently utilizing the NewsAPI's developer API that only allows 100 requests per day, and the limit has been exceeded for today."
+          );
+        }
         seterror.setError(
           "Sorry, but I'm currently utilizing the NewsAPI's developer API that only allows 100 requests per day, and the limit has been exceeded for today."
         );
@@ -59,7 +68,7 @@ export default function News(props) {
   return loading ? (
     <Loader />
   ) : articles.length ? (
-    <div className="container" style={{ marginTop: "4rem" }}>
+    <div className="container">
       <div>
         <h3 className="display-2">Top Stories</h3>
         <InfiniteScroll

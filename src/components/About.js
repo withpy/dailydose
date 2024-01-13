@@ -4,12 +4,12 @@ import dailydoseicon from "../media/dailydose.png";
 export default function About() {
   document.title = "DailyDose - About";
   return (
-    <div className="container px-5" style={{ marginTop: "4rem" }}>
+    <div className="container px-5">
       <div className="text-center py-4">
         <img
           src={dailydoseicon}
           alt="DailyDose Icon"
-          style={{ maxHeight: "5rem" }}
+          style={{ maxHeight: "5rem", minHeight: "5rem" }}
         />
       </div>
       <h1 className="text-center mb-4">About DailyDose</h1>

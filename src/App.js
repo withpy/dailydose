@@ -4,6 +4,7 @@ import News from "./components/News";
 import SearchItem from "./components/SearchItem";
 import { createHashRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
+import Alert from "./components/Alert"
 import ValueState from "./context/ValueState";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <ValueState>
             <Navbar />
             <Outlet />
+            <Alert />
           </ValueState>
         </>
       ),

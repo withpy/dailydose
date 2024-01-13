@@ -42,7 +42,7 @@ export default function NewsItem(props) {
                 target="_blank"
               >
                 <h5 className="card-title">{wordwrap(title, 100)}</h5>
-              </Link>
+              
               <p className="card-text">{wordwrap(desc, 180)}</p>
 
               <p className="card-text text-truncate">
@@ -60,7 +60,7 @@ export default function NewsItem(props) {
                     })}
                   </span>
                 </small>
-              </p>
+              </p></Link>
             </div>
           </div>
         </div>
